@@ -23,3 +23,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("apps.accounts.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+admin.site.site_header = "DJ Social Network Admin"
+admin.site.site_title = "SOCIAL NETWORK ADMIN PORTAL"
+admin.site.index_title = "Welcome to DJSN Portal"
