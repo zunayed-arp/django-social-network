@@ -14,12 +14,12 @@ class RegisterView(CreateView):
 
     extra_context = {"title": "Register"}
 
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return HttpResponseRedirect(self.get_success_url())
-        return super().dispatch(self.request, *args, **kwargs)
+    # def dispatch(self, request, *args, **kwargs):
+    #     if self.request.user.is_authenticated:
+    #         return HttpResponseRedirect(self.get_success_url())
+    #     return super().dispatch(self.request, *args, **kwargs)
 
-    def get_success_url(self) -> str:
+    def get_success_url(self):
         return self.success_url
 
     def post(self, request, *args, **kwargs):
@@ -28,9 +28,9 @@ class RegisterView(CreateView):
             messages.warning(request, "This email is already taken")
             return redirect("accounts:register")
 
-        registraion_data = request.POST
+        form_data = request.POST
+        user_form = UserRegistrationForm(data=form_data)
 
-        user_form = UserRegistrationForm(data=registraion_data)
         if user_form.is_valid():
             user = user_form.save(commit=False)
             password = user_form.cleaned_data.get("password1")
