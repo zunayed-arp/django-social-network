@@ -1,0 +1,3 @@
+from .registration_view import RegistrationAPIView
+from .logout_view import LogoutAPIView
+from .login_jwt_view import MyTokenObtainPairView
